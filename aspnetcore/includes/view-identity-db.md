@@ -1,3 +1,6 @@
+---
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+---
 ### View the Identity database
 
 # [Visual Studio](#tab/visual-studio) 
@@ -9,6 +12,6 @@
 
 # [.NET Core CLI](#tab/netcore-cli)
 
-There are many third party tools you can download to manage and view a SQLite database, for example [DB Browser for SQLite](http://sqlitebrowser.org/).
+There are many third party tools you can download to manage and view a SQLite database, for example [DB Browser for SQLite](https://sqlitebrowser.org/).
 
-------
+---

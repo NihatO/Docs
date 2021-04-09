@@ -1,9 +1,11 @@
 ---
-title: DevOps with ASP.NET Core and Azure | Continuous integration and deployment
+title: Continuous integration and deployment - DevOps with ASP.NET Core and Azure
 author: CamSoper
-description: A guide that provides end-to-end guidance on building a DevOps pipeline for an ASP.NET Core app hosted in Azure.
+description: Continuous integration and deployment in DevOps with ASP.NET Core and Azure
 ms.author: scaddie
 ms.date: 10/24/2018
+ms.custom: "devx-track-csharp, mvc, seodec18"
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
 uid: azure/devops/cicd
 ---
 # Continuous integration and deployment
@@ -32,17 +34,23 @@ In this section, you'll complete the following tasks:
 1. Click the **Create repository** button.
 1. Open your local machine's command shell. Navigate to the directory in which the *simple-feed-reader* Git repository is stored.
 1. Rename the existing *origin* remote to *upstream*. Execute the following command:
+
     ```console
     git remote rename origin upstream
     ```
+
 1. Add a new *origin* remote pointing to your copy of the repository on GitHub. Execute the following command:
+
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
+
 1. Publish your local Git repository to the newly created GitHub repository. Execute the following command:
+
     ```console
-    git push -u origin master
+    git push -u origin main
     ```
+
 1. Open a browser window, and navigate to `https://github.com/<GitHub_username>/simple-feed-reader/`. Validate that your code appears in the GitHub repository.
 
 ## Disconnect local Git deployment
@@ -53,9 +61,9 @@ Remove the local Git deployment with the following steps. Azure Pipelines (an Az
 
     ![staging Web App search term](media/cicd/portal-search-box.png)
 
-1. Click **Deployment options**. A new panel appears. Click **Disconnect** to remove the local Git source control configuration that was added in the previous chapter. Confirm the removal operation by clicking the **Yes** button.
+1. Click **Deployment Center**. A new panel appears. Click **Disconnect** to remove the local Git source control configuration that was added in the previous chapter. Confirm the removal operation by clicking the **Yes** button.
 1. Navigate to the *mywebapp<unique_number>* App Service. As a reminder, the portal's search box can be used to quickly locate the App Service.
-1. Click **Deployment options**. A new panel appears. Click **Disconnect** to remove the local Git source control configuration that was added in the previous chapter. Confirm the removal operation by clicking the **Yes** button.
+1. Click **Deployment Center**. A new panel appears. Click **Disconnect** to remove the local Git source control configuration that was added in the previous chapter. Confirm the removal operation by clicking the **Yes** button.
 
 ## Create an Azure DevOps organization
 
@@ -93,7 +101,7 @@ There are three distinct steps to complete. Completing the steps in the followin
 1. If two-factor authentication is enabled on your GitHub account, a personal access token is required. In that case, click the **Authorize with a GitHub personal access token** link. See the [official GitHub personal access token creation instructions](https://help.github.com/articles/creating-a-personal-access-token-for-the-command-line/) for help. Only the *repo* scope of permissions is needed. Otherwise, click the **Authorize using OAuth** button.
 1. When prompted, sign in to your GitHub account. Then select Authorize to grant access to your Azure DevOps organization. If successful, a new service endpoint is created.
 1. Click the ellipsis button next to the **Repository** button. Select the *<GitHub_username>/simple-feed-reader* repository from the list. Click the **Select** button.
-1. Select the *master* branch from the **Default branch for manual and scheduled builds** drop-down. Click the **Continue** button. The template selection page appears.
+1. Select the default branch (*main*) from the **Default branch for manual and scheduled builds** drop-down. Click the **Continue** button. The template selection page appears.
 
 ### Create the build definition
 
@@ -103,11 +111,11 @@ There are three distinct steps to complete. Completing the steps in the followin
 
 1. The template search results appear. Hover over the **ASP.NET Core** template, and click the **Apply** button.
 1. The **Tasks** tab of the build definition appears. Click the **Triggers** tab.
-1. Check the **Enable continuous integration** box. Under the **Branch filters** section, confirm that the **Type** drop-down is set to *Include*. Set the **Branch specification** drop-down to *master*.
+1. Check the **Enable continuous integration** box. Under the **Branch filters** section, confirm that the **Type** drop-down is set to *Include*. Set the **Branch specification** drop-down to *main*.
 
     ![Enable continuous integration settings](media/cicd/vsts-enable-ci.png)
 
-    These settings cause a build to trigger when any change is pushed to the *master* branch of the GitHub repository. Continuous integration is tested in the [Commit changes to GitHub and automatically deploy to Azure](#commit-changes-to-github-and-automatically-deploy-to-azure) section.
+    These settings cause a build to trigger when any change is pushed to the default branch (*main*) of the GitHub repository. Continuous integration is tested in the [Commit changes to GitHub and automatically deploy to Azure](#commit-changes-to-github-and-automatically-deploy-to-azure) section.
 
 1. Click the **Save & queue** button, and select the **Save** option:
 
@@ -151,7 +159,7 @@ There are three distinct steps to complete. Completing the steps in the followin
 
     With this option enabled, a deployment occurs each time a new build is available.
 1. A **Continuous deployment trigger** panel appears to the right. Click the toggle button to enable the feature. It isn't necessary to enable the **Pull request trigger**.
-1. Click the **Add** drop-down in the **Build branch filters** section. Choose the **Build Definition's default branch** option. This filter causes the release to trigger only for a build from the GitHub repository's *master* branch.
+1. Click the **Add** drop-down in the **Build branch filters** section. Choose the **Build Definition's default branch** option. This filter causes the release to trigger only for a build from the GitHub repository's default branch (*main*).
 1. Click the **Save** button. Click the **OK** button in the resulting **Save** modal dialog.
 1. Click the **Environment 1** box. An **Environment** panel appears to the right. Change the *Environment 1* text in the **Environment name** textbox to *Production*.
 
@@ -185,15 +193,16 @@ There are three distinct steps to complete. Completing the steps in the followin
     ```console
     git commit -a -m "upgraded to V4"
     ```
-1. Push the change in the *master* branch to the *origin* remote of your GitHub repository:
+
+1. Push the change in the default branch (*main*) to the *origin* remote of your GitHub repository. In the following command, replace the placeholder `{BRANCH}` with the default branch (use `main`):
 
     ```console
-    git push origin master
+    git push origin {BRANCH}
     ```
 
-    The commit appears in the GitHub repository's *master* branch:
+    The commit appears in the GitHub repository's default branch (*main*):
 
-    ![GitHub commit in master branch](media/cicd/github-commit.png)
+    ![GitHub commit in default branch (main)](media/cicd/github-commit.png)
 
     The build is triggered, since continuous integration is enabled in the build definition's **Triggers** tab:
 
@@ -229,15 +238,15 @@ The build definition's **Tasks** tab lists the individual steps being used. Ther
 
 Click the build definition's **Summary** link to view a history of builds with the definition:
 
-![build definition history](media/cicd/build-definition-summary.png)
+![Screenshot showing build definition history](media/cicd/build-definition-summary.png)
 
 On the resulting page, click the link corresponding to the unique build number:
 
-![build definition summary page](media/cicd/build-definition-completed.png)
+![Screenshot showing build definition summary page](media/cicd/build-definition-completed.png)
 
 A summary of this specific build is displayed. Click the **Artifacts** tab, and notice the *drop* folder produced by the build is listed:
 
-![build definition artifacts - drop folder](media/cicd/build-definition-artifacts.png)
+![Screenshot showing build definition artifacts - drop folder](media/cicd/build-definition-artifacts.png)
 
 Use the **Download** and **Explore** links to inspect the published artifacts.
 
@@ -245,27 +254,27 @@ Use the **Download** and **Explore** links to inspect the published artifacts.
 
 A release pipeline was created with the name *MyFirstProject-ASP.NET Core-CD*:
 
-![release pipeline overview](media/cicd/release-definition-overview.png)
+![Screenshot showing release pipeline overview](media/cicd/release-definition-overview.png)
 
 The two major components of the release pipeline are the **Artifacts** and the **Environments**. Clicking the box in the **Artifacts** section reveals the following panel:
 
-![release pipeline artifacts](media/cicd/release-definition-artifacts.png)
+![Screenshot showing release pipeline artifacts](media/cicd/release-definition-artifacts.png)
 
 The **Source (Build definition)** value represents the build definition to which this release pipeline is linked. The *.zip* file produced by a successful run of the build definition is provided to the *Production* environment for deployment to Azure. Click the *1 phase, 2 tasks* link in the *Production* environment box to view the release pipeline tasks:
 
-![release pipeline tasks](media/cicd/release-definition-tasks.png)
+![Screenshot showing release pipeline tasks](media/cicd/release-definition-tasks.png)
 
 The release pipeline consists of two tasks: *Deploy Azure App Service to Slot* and *Manage Azure App Service - Slot Swap*. Clicking the first task reveals the following task configuration:
 
-![release pipeline deploy task](media/cicd/release-definition-task1.png)
+![Screenshot showing release pipeline deploy task](media/cicd/release-definition-task1.png)
 
 The Azure subscription, service type, web app name, resource group, and deployment slot are defined in the deployment task. The **Package or folder** textbox holds the *.zip* file path to be extracted and deployed to the *staging* slot of the *mywebapp\<unique_number\>* web app.
 
 Clicking the slot swap task reveals the following task configuration:
 
-![release pipeline slot swap task](media/cicd/release-definition-task2.png)
+![Screenshot showing release pipeline slot swap task](media/cicd/release-definition-task2.png)
 
-The subscription, resource group, service type, web app name, and deployment slot details are provided. The **Swap with Production** checkbox is checked. Consequently, the bits deployed to the *staging* slot are swapped into the production environment.
+The subscription, resource group, service type, web app name, and deployment slot details are provided. The **Swap with Production** check box is checked. Consequently, the bits deployed to the *staging* slot are swapped into the production environment.
 
 ## Additional reading
 

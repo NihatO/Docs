@@ -1,3 +1,6 @@
+---
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+---
 <a name="codegenerator"></a>
 The following table details the ASP.NET Core code generators` parameters:
 
@@ -11,6 +14,6 @@ The following table details the ASP.NET Core code generators` parameters:
 
 Use the `h` switch to get help on the `aspnet-codegenerator razorpage` command:
 
-```console
+```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```

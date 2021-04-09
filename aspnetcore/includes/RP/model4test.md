@@ -1,4 +1,8 @@
+---
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+---
 <a name="test"></a>
+
 ### Test the app
 
 * Run the app and append `/Movies` to the URL in the browser (`http://localhost:port/movies`).

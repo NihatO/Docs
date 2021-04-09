@@ -1,3 +1,6 @@
+---
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+---
 The default template creates **RazorPagesMovie**, **Home**, **About** and **Contact** links and pages. Depending on the size of your browser window, you might need to click the navigation icon to show the links.
 
 ![Home or Index page](../../tutorials/razor-pages/razor-pages-start/_static/home2.png)
@@ -13,7 +16,7 @@ The following table lists the files and folders in the project. For this tutoria
 | wwwroot | Contains static files. See [Static files](xref:fundamentals/static-files). |
 | Pages | Folder for [Razor Pages](xref:razor-pages/index). |
 | *appsettings.json* | [Configuration](xref:fundamentals/configuration/index) |
-| *Program.cs* | [Hosts](xref:fundamentals/host/index) the ASP.NET Core app.|
+| *Program.cs* | [Hosts](xref:fundamentals/index#host) the ASP.NET Core app.|
 | *Startup.cs* | Configures services and the request pipeline. See [Startup](xref:fundamentals/startup).|
 
 ### The Pages folder

@@ -1,15 +1,18 @@
+---
+no-loc: [appsettings.json, "ASP.NET Core Identity", cookie, Cookie, Blazor, "Blazor Server", "Blazor WebAssembly", "Identity", "Let's Encrypt", Razor, SignalR]
+---
 ## Add initial migration and update the database
 
 * Open a command prompt and navigate to the project directory. (The directory containing the *Startup.cs* file).
 
 * Run the following commands in the command prompt:
 
-  ```console
+  ```dotnetcli
   dotnet restore
   dotnet ef migrations add Initial
   dotnet ef database update
   ```
-  
+
   [.NET Core](/dotnet/core/tools/index) is a cross-platform implementation of .NET. Here is what these commands do:
 
   * [dotnet restore](/dotnet/core/tools/dotnet-restore): Downloads the NuGet packages specified in the *.csproj* file.
